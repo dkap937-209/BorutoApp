@@ -25,4 +25,6 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Create Release
-      uses: ncipollo/release-action@v1.13.0      
+      uses: ncipollo/release-action@v1.13.0 
+      with:
+        tag: v1.0.0
