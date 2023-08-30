@@ -8,6 +8,6 @@ import com.dk.boruto.util.Constants.HERO_REMOTE_KEY_TABLE
 data class HeroRemoteKey(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
-    val prevKey: Int?,
-    val nextKey: Int?
+    val previousPage: Int?,
+    val nextPage: Int?
 )
