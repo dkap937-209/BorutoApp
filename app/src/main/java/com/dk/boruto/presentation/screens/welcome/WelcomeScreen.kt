@@ -24,9 +24,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.dk.boruto.R
 import com.dk.boruto.domain.model.OnBoardingPage
+import com.dk.boruto.navigation.Screen
 import com.dk.boruto.ui.theme.EXTRA_LARGE_PADDING
 import com.dk.boruto.ui.theme.PAGING_INDICATOR_SPACING
 import com.dk.boruto.ui.theme.PAGING_INDICATOR_WIDTH
@@ -46,7 +48,10 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun WelcomeScreen(navController: NavHostController) {
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
+) {
     val pages = listOf(
         OnBoardingPage.Greetings,
         OnBoardingPage.Explore,
@@ -84,7 +89,11 @@ fun WelcomeScreen(navController: NavHostController) {
             modifier = Modifier
                 .weight(1f),
             pagerState = pagerState,
-            onClick = {}
+            onClick = {
+                navController.popBackStack()
+                navController.navigate(Screen.Home.route)
+                welcomeViewModel.saveOnBoardingState(completed = true)
+            }
         )
     }
 }
