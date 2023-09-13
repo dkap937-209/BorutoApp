@@ -2,6 +2,8 @@ package com.dk.boruto.util
 
 object Constants {
 
+    const val BASE_URL = "https://boruto-server.onrender.com"
+
     const val DETAILS_ARGUMENT_KEY = "heroId"
 
     const val BORUTO_DATABASE = "boruto_database"
