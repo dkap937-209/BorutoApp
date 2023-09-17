@@ -14,4 +14,6 @@ object Constants {
     const val PREFERENCES_KEY = "on_boarding_completed"
 
     const val LAST_ONBOARDING_PAGE = 2
+
+    const val PAGING_CONFIG_PAGE_SIZE = 3
 }

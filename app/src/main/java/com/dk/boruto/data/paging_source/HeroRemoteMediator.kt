@@ -20,9 +20,6 @@ class HeroRemoteMediator @Inject constructor(
     private val heroDao = borutoDatabase.heroDao()
     private val heroRemoteKeysDao = borutoDatabase.heroRemoteKeysDao()
 
-
-
-
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): RemoteMediator.MediatorResult {
         return try {
 
