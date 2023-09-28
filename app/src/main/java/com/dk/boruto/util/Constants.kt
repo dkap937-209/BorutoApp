@@ -16,4 +16,6 @@ object Constants {
     const val LAST_ONBOARDING_PAGE = 2
 
     const val PAGING_CONFIG_PAGE_SIZE = 3
+
+    const val MAX_STARS = 5
 }
