@@ -18,4 +18,6 @@ object Constants {
     const val PAGING_CONFIG_PAGE_SIZE = 3
 
     const val MAX_STARS = 5
+
+    const val TIMEOUT_IN_SECONDS = 120L
 }

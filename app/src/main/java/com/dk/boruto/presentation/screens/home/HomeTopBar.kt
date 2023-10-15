@@ -15,9 +15,6 @@ import com.dk.boruto.R
 import com.dk.boruto.ui.theme.topAppBarBackgroundColor
 import com.dk.boruto.ui.theme.topAppBarContentColor
 
-//TODO: Dark mode not working for home and welcome screen but on splash screen
-// That is because there is an explicit if statement for if it is in dark mode
-
 @Composable
 fun HomeTopBar(
     onSearchClicked: () -> Unit

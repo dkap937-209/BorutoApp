@@ -5,6 +5,7 @@ import com.dk.boruto.data.remote.BorutoApi
 import com.dk.boruto.data.repository.RemoteDataSourceImpl
 import com.dk.boruto.domain.repository.RemoteDataSource
 import com.dk.boruto.util.Constants.BASE_URL
+import com.dk.boruto.util.Constants.TIMEOUT_IN_SECONDS
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -25,8 +26,8 @@ object NetworkModule {
     @Singleton
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .readTimeout(40, TimeUnit.SECONDS)
-            .connectTimeout(40, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .build()
 
     }
