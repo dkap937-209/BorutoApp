@@ -20,7 +20,7 @@ class HeroRemoteMediator @Inject constructor(
     private val heroDao = borutoDatabase.heroDao()
     private val heroRemoteKeysDao = borutoDatabase.heroRemoteKeysDao()
 
-    override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): RemoteMediator.MediatorResult {
+    override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
         return try {
 
             val page = when(loadType) {
@@ -76,6 +76,10 @@ class HeroRemoteMediator @Inject constructor(
         catch (e: Exception){
             MediatorResult.Error(e)
         }
+    }
+
+    override suspend fun initialize(): InitializeAction {
+        return super.initialize()
     }
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
