@@ -1,5 +1,6 @@
 package com.dk.boruto.data.paging_source
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -9,8 +10,12 @@ import com.dk.boruto.data.local.BorutoDatabase
 import com.dk.boruto.data.remote.BorutoApi
 import com.dk.boruto.domain.model.Hero
 import com.dk.boruto.domain.model.HeroRemoteKeys
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
+private const val TAG = "HeroRemoteMediator"
 @OptIn(ExperimentalPagingApi::class)
 class HeroRemoteMediator @Inject constructor(
     private val borutoApi: BorutoApi,
@@ -60,7 +65,8 @@ class HeroRemoteMediator @Inject constructor(
                         HeroRemoteKeys(
                             id = hero.id,
                             previousPage = prevPage,
-                            nextPage = nextPage
+                            nextPage = nextPage,
+                            lastUpdated = response.lastUpdated
                         )
                     }
                     heroRemoteKeysDao.addAllRemoteKeys(
@@ -79,13 +85,28 @@ class HeroRemoteMediator @Inject constructor(
     }
 
     override suspend fun initialize(): InitializeAction {
-        return super.initialize()
+        val currentTime = System.currentTimeMillis()
+        val lastUpdated = heroRemoteKeysDao.getRemoteKeys(heroId = 1)?.lastUpdated ?: 0L
+        val cacheTimeoutInMinutes = 1440
+
+        Log.d(TAG, "Current time: ${parseMillis(currentTime)}")
+        Log.d(TAG, "Last Updated Time: ${parseMillis(lastUpdated)}")
+
+        val diffInMinutes = ((currentTime - lastUpdated) / 1000 / 60).toInt()
+        return if(diffInMinutes <= cacheTimeoutInMinutes){
+            Log.d(TAG, "Cache up to date")
+            InitializeAction.SKIP_INITIAL_REFRESH
+        }
+        else{
+            Log.d(TAG, "Refreshing cache")
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
     }
 
     private suspend fun getRemoteKeyClosestToCurrentPosition(
         state: PagingState<Int, Hero>
     ): HeroRemoteKeys? {
-        return state.anchorPosition?.let{position ->
+        return state.anchorPosition?.let{ position ->
             state.closestItemToPosition(position)?.id?.let { id ->
                 heroRemoteKeysDao.getRemoteKeys(heroId = id)
             }
@@ -107,6 +128,12 @@ class HeroRemoteMediator @Inject constructor(
         return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { hero ->
             heroRemoteKeysDao.getRemoteKeys(heroId = hero.id)
         }
+    }
+
+    private fun parseMillis(millis: Long): String{
+        val date = Date(millis)
+        val format = SimpleDateFormat("yyyy.MM.dd HH:mm", Locale.ROOT)
+        return format.format(date)
     }
 }
 
