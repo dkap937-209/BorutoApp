@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.dk.boruto.domain.model.Hero
+import com.dk.boruto.navigation.Screen
 import com.dk.boruto.presentation.common.HeroItem
 import com.dk.boruto.presentation.common.HeroItemPreview
 import com.dk.boruto.presentation.common.ListContent
@@ -36,7 +37,11 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            HomeTopBar(onSearchClicked = {})
+            HomeTopBar(
+                onSearchClicked = {
+                    navController.navigate(Screen.Search.route)
+                }
+            )
         }
     ){  paddingValues ->
 
