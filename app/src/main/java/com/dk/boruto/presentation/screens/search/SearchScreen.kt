@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.dk.boruto.presentation.common.ListContent
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -32,6 +33,12 @@ fun SearchScreen(
                     navController.popBackStack()
                 }
             )
+        },
+        content = {
+            ListContent(
+                heroes = heroes,
+                navController = navController
+            )
         }
-    ){}
+    )
 }
