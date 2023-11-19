@@ -20,4 +20,6 @@ object Constants {
     const val MAX_STARS = 5
 
     const val TIMEOUT_IN_SECONDS = 120L
+
+    const val ABOUT_TEXT_MAX_LINES = 7
 }

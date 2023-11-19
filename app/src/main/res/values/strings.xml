@@ -9,4 +9,11 @@
     <string name="search_heroes_icon_string">Search Heroes</string>
     <string name="close_search_icon">Close Search Icon</string>
     <string name="info_icon">Info Icon</string>
+    <string name="power">Power</string>
+    <string name="month">Month</string>
+    <string name="birthday">Birthday</string>
+    <string name="about">About</string>
+    <string name="family">Family</string>
+    <string name="abilities">Abilities</string>
+    <string name="nature_types">Nature Types</string>
 </resources>
