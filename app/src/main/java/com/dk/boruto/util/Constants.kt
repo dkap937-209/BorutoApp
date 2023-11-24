@@ -22,4 +22,6 @@ object Constants {
     const val TIMEOUT_IN_SECONDS = 120L
 
     const val ABOUT_TEXT_MAX_LINES = 7
+
+    const val MINIMUM_BACKGROUND_IMAGE = 0.5f
 }
