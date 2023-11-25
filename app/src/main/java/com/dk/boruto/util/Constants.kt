@@ -24,4 +24,6 @@ object Constants {
     const val ABOUT_TEXT_MAX_LINES = 7
 
     const val MINIMUM_BACKGROUND_IMAGE = 0.5f
+
+
 }
