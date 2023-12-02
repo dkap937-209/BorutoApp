@@ -30,6 +30,10 @@ val ShimmerDarkGray = Color(0xFF1D1D1D)
 
 fun ColorScheme.isLight() = this.background.luminance() > 0.5
 
+val Colors.statusBarColour
+    @Composable
+    get() = if(isLight) Purple700 else Color.Black
+
 val Colors.welcomeScreenBackgroundColor
     @Composable
     get() = if(MaterialTheme.colorScheme.isLight()) Color.White else Color.Black

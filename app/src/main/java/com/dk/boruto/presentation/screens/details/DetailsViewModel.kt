@@ -12,8 +12,11 @@ import com.dk.boruto.domain.use_cases.UseCases
 import com.dk.boruto.util.Constants.DETAILS_ARGUMENT_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -41,4 +44,23 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent: SharedFlow<UiEvent> = _uiEvent.asSharedFlow()
+
+    private val _colourPalette: MutableState<Map<String, String>> = mutableStateOf(mapOf())
+    val colourPalette: State<Map<String, String>> = _colourPalette
+
+    fun generateColourPalette(){
+        viewModelScope.launch {
+            _uiEvent.emit(UiEvent.GenerateColourPalette)
+        }
+    }
+
+    fun setColourPalette(colours: Map<String, String>){
+        _colourPalette.value = colours
+    }
+}
+
+sealed class UiEvent{
+    object GenerateColourPalette: UiEvent()
 }

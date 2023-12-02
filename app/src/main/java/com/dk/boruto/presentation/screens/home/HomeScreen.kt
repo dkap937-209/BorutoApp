@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +26,8 @@ import com.dk.boruto.presentation.common.HeroItem
 import com.dk.boruto.presentation.common.HeroItemPreview
 import com.dk.boruto.presentation.common.ListContent
 import com.dk.boruto.ui.theme.LARGE_PADDING
+import com.dk.boruto.ui.theme.statusBarColour
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val TAG = "HomeScreen"
 @Composable
@@ -34,6 +37,11 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
     val allHeroes = homeViewModel.getAllHeroes.collectAsLazyPagingItems()
+
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(
+        color = MaterialTheme.colors.statusBarColour
+    )
 
     Scaffold(
         topBar = {
