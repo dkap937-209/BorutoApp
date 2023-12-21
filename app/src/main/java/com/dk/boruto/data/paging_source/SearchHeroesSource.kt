@@ -29,7 +29,7 @@ class SearchHeroesSource @Inject constructor(
                 )
             }
             else{
-                Log.d(TAG, "Heroes is empty")
+//                Log.d(TAG, "Heroes is empty")
                 LoadResult.Page(
                     data = emptyList(),
                     prevKey = null,
@@ -37,7 +37,7 @@ class SearchHeroesSource @Inject constructor(
                 )
             }
         }catch (e: Exception){
-            Log.d(TAG, "Error occurred: $e")
+//            Log.d(TAG, "Error occurred: $e")
             LoadResult.Error(e)
         }
     }
