@@ -2,6 +2,7 @@ package com.dk.boruto.data.remote
 
 import com.dk.boruto.domain.model.ApiResponse
 import com.dk.boruto.domain.model.Hero
+import java.io.IOException
 
 class FakeBorutoApi2: BorutoApi {
 
@@ -395,16 +396,33 @@ class FakeBorutoApi2: BorutoApi {
         )
     )
 
+    fun clearData() {
+        page1 = emptyList()
+    }
+
+    private var exception = false
+
+    fun addException() {
+        exception = true
+    }
+
 
     override suspend fun getAllHeroes(page: Int, applicationId: String): ApiResponse {
-        require(page in 1..5)
-        return ApiResponse(
-            success = true,
-            message = "ok",
-            previousPage = calculate(page = page)["prevPage"],
-            nextPage = calculate(page = page)["nextPage"],
-            heroes = heroes[page]!!
-        )
+
+        if(exception){
+            throw IOException()
+        }
+        else{
+            require(page in 1..5)
+            return ApiResponse(
+                success = true,
+                message = "ok",
+                previousPage = calculate(page = page)["prevPage"],
+                nextPage = calculate(page = page)["nextPage"],
+                heroes = heroes[page]!!
+            )
+        }
+
     }
 
     override suspend fun searchHeroes(name: String, applicationId: String): ApiResponse {
@@ -414,6 +432,11 @@ class FakeBorutoApi2: BorutoApi {
     }
 
     private fun calculate(page: Int): Map<String, Int?> {
+
+        if(page1.isEmpty()){
+            return mapOf("prevPage" to null, "nextPage" to null)
+        }
+
         var prevPage: Int? = page
         var nextPage: Int? = page
 
