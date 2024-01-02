@@ -5,13 +5,19 @@
       <entry key="HeroRemoteMediatorTest">
         <State />
       </entry>
+      <entry key="SearchWidgetTest">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="refreshLoadReturnsSuccessResultWhenMoreDataIsPresent()">
+      <entry key="openSearchWidget_addInputText_pressCloseIconOnce_assertEmptyInputText()">
         <State />
       </entry>
-      <entry key="refreshLoadSuccessANdEndOfPaginationTrueWhenNoMoreData()">
+      <entry key="openSearchWidget_addInputText_pressCloseIcon_assertEmptyInputText()">
+        <State />
+      </entry>
+      <entry key="openSearchWidget_addInputText_pressClosedTwice_assertClosedState()">
         <State />
       </entry>
     </value>
