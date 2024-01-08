@@ -120,6 +120,7 @@ class SearchWidgetTest {
             }
         }
 
+
         composeTestRule.onNodeWithContentDescription("CloseIcon")
             .performClick()
 
